@@ -227,7 +227,11 @@ export default function translate(str: string) {
       };
       const returnMessage = (systemMessage = false) => {
         let apps: string[] = [];
-        if (callStackCount > 1) apps.push(indent(callStackCount - 1));
+        let ind = indent(callStackCount);
+        if (ind.length > 1) {
+          ind = ind.substring(0, ind.length - 1);
+        }
+        if (ind.length) apps.push(ind);
         return [
           ...(PRINT_NAME
             ? [
